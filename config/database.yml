@@ -1,0 +1,20 @@
+# PostgreSQL. Versions 9.3 and up are supported.
+#
+default: &default
+  adapter: postgresql
+  encoding: utf-8
+
+development:
+  <<: *default
+  database: finance_accounting_calendar_backend
+
+test:
+  <<: *default
+  database: finance_accounting_calendar_backend
+
+#
+production:
+  <<: *default
+  database: finance_accounting_calendar_backend
+  username: finance_accounting_calendar_backend
+  password: finance_accounting_calendar_backend
