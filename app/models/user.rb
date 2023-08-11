@@ -1,11 +1,8 @@
 class User < ApplicationRecord
-  devise :database_authenticatable, :registerable,
-         :validatable
+  devise :database_authenticatable, :registerable, :validatable
 
-  has_many :user_incomes
-  has_many :incomes, through: :user_incomes
-  has_many :user_payments
-  has_many :payments, through: :user_payments
+  has_and_belongs_to_many :incomes, dependent: :destroy
+  has_and_belongs_to_many :payments, dependent: :destroy
 
   validates :email, presence: true, uniqueness: true
 end

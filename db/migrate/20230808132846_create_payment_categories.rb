@@ -5,5 +5,7 @@ class CreatePaymentCategories < ActiveRecord::Migration[7.0]
 
       t.timestamps
     end
+
+    add_index :payment_categories, :name, unique: true
   end
 end

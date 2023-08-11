@@ -5,5 +5,7 @@ class CreateIncomeCategories < ActiveRecord::Migration[7.0]
 
       t.timestamps
     end
+
+    add_index :income_categories, :name, unique: true
   end
 end
