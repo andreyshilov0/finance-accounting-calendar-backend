@@ -1,13 +1,14 @@
 class PaymentCategory < ApplicationRecord
+  has_and_belongs_to_many :users
   has_many :payments, dependent: :nullify
 
   validates :name, presence: true, uniqueness: true
 
-  after_destroy :update_payments
+  before_destroy :handle_destroy
 
   private
 
-  def update_payments
-    Payment.where(payment_category_id: id).update_all(payment_category_id: nil)
+  def handle_destroy
+    payments.update_all(deleted: true, payment_category_id: nil)
   end
 end

@@ -1,13 +1,14 @@
 class IncomeCategory < ApplicationRecord
+  has_and_belongs_to_many :users
   has_many :incomes, dependent: :nullify
 
   validates :name, presence: true, uniqueness: true
 
-  after_destroy :update_incomes
+  before_destroy :handle_destroy
 
   private
 
-  def update_incomes
-    Income.where(income_category_id: id).update_all(income_category_id: nil)
+  def handle_destroy
+    incomes.update_all(deleted: true, income_category_id: nil)
   end
 end
