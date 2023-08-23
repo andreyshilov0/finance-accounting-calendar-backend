@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_21_135040) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_08_135442) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -54,20 +54,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_21_135040) do
     t.index ["date"], name: "index_payments_on_date"
     t.index ["payment_category_id"], name: "index_payments_on_payment_category_id"
     t.index ["user_id"], name: "index_payments_on_user_id"
-  end
-
-  create_table "user_incomes", id: false, force: :cascade do |t|
-    t.bigint "user_id"
-    t.bigint "income_id"
-    t.index ["income_id"], name: "index_user_incomes_on_income_id"
-    t.index ["user_id"], name: "index_user_incomes_on_user_id"
-  end
-
-  create_table "user_payments", id: false, force: :cascade do |t|
-    t.bigint "user_id"
-    t.bigint "payment_id"
-    t.index ["payment_id"], name: "index_user_payments_on_payment_id"
-    t.index ["user_id"], name: "index_user_payments_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
