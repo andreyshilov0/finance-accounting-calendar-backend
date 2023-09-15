@@ -5,11 +5,11 @@ module Mutations
     field :category, Types::PaymentCategoryType, null: true
 
     def resolve(name:)
-      existing_category = PaymentCategory.find_by(name:)
+      existing_category = PaymentCategory.find_by(name:, user_id: current_user.id)
 
       return execution_error(I18n.t('category_already_exists', name:)) if existing_category
 
-      new_category = PaymentCategory.create(name:)
+      new_category = PaymentCategory.create(name:, user_id: current_user.id)
 
       if new_category.valid?
         { category: new_category }

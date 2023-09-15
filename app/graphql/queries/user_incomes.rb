@@ -3,10 +3,7 @@ module Queries
     type [Types::IncomeType], null: true
 
     def resolve
-      incomes = current_user.incomes
-      raise execution_error(I18n.t('failed_to_fetch_user_incomes')) if incomes.nil?
-
-      incomes
+      current_user.incomes || (raise execution_error(I18n.t('failed_to_fetch_user_incomes')))
     end
   end
 end
