@@ -6,11 +6,11 @@ module Mutations
     field :category, Types::IncomeCategoryType, null: true
 
     def resolve(category_id:, new_name:)
-      income_category = IncomeCategory.find_by(id: category_id, user_id: current_user.id)
+      income_category = current_user.income_categories.find_by(id: category_id)
 
       return execution_error(I18n.t('category_not_found')) unless income_category
 
-      existing_category = IncomeCategory.find_by(name: new_name, user_id: current_user.id)
+      existing_category = current_user.income_categories.find_by(name: new_name)
       return execution_error(I18n.t('category_already_exists', name: new_name)) if existing_category
 
       income_category.update(name: new_name)

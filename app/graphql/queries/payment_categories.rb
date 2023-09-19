@@ -3,7 +3,7 @@ module Queries
     type [Types::PaymentCategoryType], null: true
 
     def resolve
-      PaymentCategory.all
+      current_user.payment_categories
     end
   end
 end

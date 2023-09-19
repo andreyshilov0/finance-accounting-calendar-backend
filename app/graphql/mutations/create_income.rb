@@ -7,7 +7,6 @@ module Mutations
     field :income, Types::IncomeType, null: true
 
     def resolve(amount:, name:, income_category_id:)
-
       new_income = current_user.incomes.build(amount:, name:, date: Time.current, income_category_id:)
 
       if new_income.save

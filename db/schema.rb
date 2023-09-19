@@ -10,15 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 20_230_915_125_835) do
+ActiveRecord::Schema[7.0].define(version: 20_230_808_135_442) do
   # These are extensions that must be enabled in order to support this database
   enable_extension 'plpgsql'
 
   create_table 'income_categories', force: :cascade do |t|
+    t.bigint 'user_id'
     t.string 'name', null: false
     t.datetime 'created_at', null: false
     t.datetime 'updated_at', null: false
-    t.bigint 'user_id'
     t.index ['name'], name: 'index_income_categories_on_name', unique: true
     t.index ['user_id'], name: 'index_income_categories_on_user_id'
   end
@@ -38,10 +38,10 @@ ActiveRecord::Schema[7.0].define(version: 20_230_915_125_835) do
   end
 
   create_table 'payment_categories', force: :cascade do |t|
+    t.bigint 'user_id'
     t.string 'name', null: false
     t.datetime 'created_at', null: false
     t.datetime 'updated_at', null: false
-    t.bigint 'user_id'
     t.index ['name'], name: 'index_payment_categories_on_name', unique: true
     t.index ['user_id'], name: 'index_payment_categories_on_user_id'
   end
@@ -72,6 +72,8 @@ ActiveRecord::Schema[7.0].define(version: 20_230_915_125_835) do
     t.index ['reset_password_token'], name: 'index_users_on_reset_password_token', unique: true
   end
 
+  add_foreign_key 'income_categories', 'users'
   add_foreign_key 'incomes', 'users'
+  add_foreign_key 'payment_categories', 'users'
   add_foreign_key 'payments', 'users'
 end

@@ -3,7 +3,7 @@ module Queries
     type [Types::IncomeCategoryType], null: true
 
     def resolve
-      IncomeCategory.all
+      current_user.income_categories
     end
   end
 end
