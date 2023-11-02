@@ -4,9 +4,10 @@ class Authentication
 
     split_token = token.split(' ').last
     decoded_token = JWT.decode(split_token, ENV['HMAC_SECRET'], true, { algorithm: ENV['HMAC_ALGORITHM'] })
-
-    combined_hash = {}
-    decoded_token.each { |hash| combined_hash.merge!(hash) }
-    User.find_by(id: combined_hash['id'])
+    
+    user_id = decoded_token[0]['user_id'] # предполагая, что вы помещаете id пользователя как 'user_id'
+    User.find_by(id: user_id)
+  rescue JWT::DecodeError
+    nil
   end
 end

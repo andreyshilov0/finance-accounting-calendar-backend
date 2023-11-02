@@ -1,0 +1,16 @@
+.container.d-flex.align-items-center.justify-content-center.min-vh-100
+  .row.justify-content-center
+    .col-md-12
+      .card.mt-5
+        .card-header
+          h2 Log in
+        .card-body
+          = form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: 'form' }) do |f|
+            .form-group
+              = f.label :email
+              = f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control'
+            .form-group.mb-3
+              = f.label :password
+              = f.password_field :password, autocomplete: "current-password", class: 'form-control'
+            .form-group
+              = f.submit "Log in", class: 'btn btn-secondary'
