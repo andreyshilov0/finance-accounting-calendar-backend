@@ -1,0 +1,5 @@
+= form_for @income_category, url: income_categories_path do |f|
+  = f.label :name, 'Название категории'
+  = f.text_field :name
+  = f.submit 'Сохранить'
+

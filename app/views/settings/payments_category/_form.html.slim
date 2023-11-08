@@ -1,0 +1,4 @@
+= form_for @payment_category, url: payment_categories_path do |f|
+  = f.label :name, 'Название категории'
+  = f.text_field :name
+  = f.submit 'Сохранить'

@@ -1,4 +1,36 @@
-h1
-  | Добро пожаловать, = current_user.email!
-p
-  | Это ваша главная страница.
+nav.navbar.navbar-expand-lg.navbar-light.bg-light
+  .container
+    a.navbar-brand href="#"  | Ваш Логотип
+    button.navbar-toggler type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"
+      span.navbar-toggler-icon
+    .collapse.navbar-collapse#navbarNav
+      ul.navbar-nav.mr-auto
+        li.nav-item.active
+      ul.navbar-nav
+        li.nav-item
+          = button_to  "Выйти", destroy_user_session_path, method: :delete, class: 'nav-link'
+
+
+.container.d-flex.align-items-center.justify-content-center
+  .row
+    .col-md-12
+      ul.nav.nav-tabs#myTab role="tablist"
+        li.nav-item
+          a.nav-link.active href="#incomes" data-toggle="tab" role="tab" aria-controls="incomes" aria-selected="true"  Incomes
+        li.nav-item
+          a.nav-link href="#payments" data-toggle="tab" role="tab" aria-controls="payments" aria-selected="false"  Payments
+        li.nav-item
+          a.nav-link href="#charts" data-toggle="tab" role="tab" aria-controls="charts" aria-selected="false"  Charts
+        li.nav-item
+          = link_to 'Settings', settings_path, class: 'nav-link'
+
+      .tab-content#myTabContent
+        .tab-pane.fade.show.active#home role="tabpanel" aria-labelledby="home-tab"
+          table.table.table-hover
+            tbody
+              tr
+                td  Данные 
+
+        .tab-pane.fade#profile role="tabpanel" aria-labelledby="profile-tab"
+        .tab-pane.fade#messages role="tabpanel" aria-labelledby="messages-tab"
+        .tab-pane.fade#settings role="tabpanel" aria-labelledby="settings-tab"
