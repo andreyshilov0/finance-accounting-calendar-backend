@@ -8,28 +8,33 @@ class IncomeCategoriesController < ApplicationController
 
   def new
     @income_category = current_user.income_categories.build
+    render 'settings/incomes_category/new'
   end
 
   def create
     @income_category = current_user.income_categories.build(income_category_params)
     if @income_category.save
-      redirect_to income_categories_path, notice: 'Категория дохода создана.'
+      redirect_to settings_path, notice: 'Категория дохода создана.'
     else
-      render :new
+      render 'settings/incomes_category/new'
     end
+  end
+
+  def edit
+    render 'settings/incomes_category/edit'
   end
 
   def update
     if @income_category.update(income_category_params)
-      redirect_to income_categories_path, notice: 'Категория дохода обновлена.'
+      redirect_to settings_path, notice: 'Категория дохода обновлена.'
     else
-      render :edit
+      render 'settings/incomes_category/edit'
     end
   end
 
   def destroy
     @income_category.destroy
-    redirect_to income_categories_path, notice: 'Категория дохода удалена.'
+    redirect_to settings_path, notice: 'Категория дохода удалена.'
   end
 
   private

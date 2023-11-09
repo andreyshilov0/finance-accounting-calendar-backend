@@ -1,0 +1,42 @@
+doctype html
+html
+  head
+    title Finance Accounting Calendar 
+    meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    = csrf_meta_tags
+    = csp_meta_tag
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+    link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet"
+
+  body
+    - if user_signed_in?
+      nav.navbar.navbar-expand-lg.navbar-light.bg-light
+        .container
+          a.navbar-brand href=""  | FAC
+          button.navbar-toggler type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"
+            span.navbar-toggler-icon
+          .collapse.navbar-collapse#navbarNav
+            ul.navbar-nav
+              li.nav-item
+                = link_to "EN", { locale: 'en' }, class: "nav-link #{'active border border-primary' if I18n.locale == :en}"
+              li.nav-item
+                = link_to "RU", { locale: 'ru' }, class: "nav-link #{'active border border-primary' if I18n.locale == :ru}"
+            ul.navbar-nav.ml-auto
+                li.nav-item
+                  = button_to t('main_page.logout'), destroy_user_session_path, method: :delete, class: 'nav-link'
+
+      .container.d-flex.align-items-center.justify-content-center
+        .row
+          .col-md-14
+            ul.nav.nav-tabs#myTab role="tablist"
+              li.nav-item
+                a.nav-link href="#incomes" data-toggle="tab" role="tab" aria-controls="incomes" aria-selected="true"  Incomes
+              li.nav-item
+                a.nav-link href="#payments" data-toggle="tab" role="tab" aria-controls="payments" aria-selected="false"  Payments
+              li.nav-item
+                a.nav-link href="#charts" data-toggle="tab" role="tab" aria-controls="charts" aria-selected="false"  Charts
+              li.nav-item
+                = link_to t('main_page.settings'), settings_path, class: 'nav-link'
+
+    = yield
