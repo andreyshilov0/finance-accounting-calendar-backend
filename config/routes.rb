@@ -1,14 +1,12 @@
 Rails.application.routes.draw do
   scope '(:locale)', locale: /en|ru/ do
-    get 'home/index'
     devise_for :users, controllers: {
-      registrations: 'users/registrations',
       sessions: 'users/sessions'
     }
 
     devise_scope :user do
       authenticated :user do
-        root 'home#index', as: :authenticated_root
+        root 'incomes#index', as: :authenticated_root
       end
       unauthenticated do
         root 'devise/sessions#new', as: :unauthenticated_root
@@ -18,7 +16,12 @@ Rails.application.routes.draw do
     authenticated :user do
       resources :income_categories, except: [:show]
       resources :payment_categories, except: [:show]
+      resources :incomes, controller: 'incomes', except: %i[index show]
+      resources :payments, controller: 'payments', except: %i[index show]
       get 'settings', to: 'settings#index'
+      get 'incomes', to: 'incomes#index'
+      get 'payments', to: 'payments#index'
     end
   end
+  root to: redirect("/#{I18n.default_locale}", status: 302), as: :redirected_root
 end

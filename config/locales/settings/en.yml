@@ -6,3 +6,4 @@ en:
     button_add_category: "Create"
     button_edit_category: "Update"
     name_category: "Category name"
+    button_return: "Cancel"

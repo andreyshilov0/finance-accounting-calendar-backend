@@ -19,3 +19,4 @@
 
             .form-group
               = f.submit @income_category.new_record? ? t('settings.button_add_category') : t('settings.button_edit_category'), class: 'btn btn-primary'
+              = link_to t('settings.button_return'), settings_path, class: 'btn btn-secondary'

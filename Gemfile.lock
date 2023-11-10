@@ -169,6 +169,9 @@ GEM
     kaminari-activerecord (1.2.2)
       activerecord
       kaminari-core (= 1.2.2)
+    kaminari-bootstrap (3.0.1)
+      kaminari (>= 0.13.0)
+      rails
     kaminari-core (1.2.2)
     loofah (2.21.3)
       crass (~> 1.0.2)
@@ -355,6 +358,7 @@ DEPENDENCIES
   jquery-rails
   jwt
   kaminari
+  kaminari-bootstrap
   pg (~> 1.1)
   popper_js (~> 2.11, >= 2.11.8)
   pry (~> 0.14.2)

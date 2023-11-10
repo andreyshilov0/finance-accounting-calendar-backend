@@ -1,0 +1,9 @@
+= render 'financials/form', 
+  form_url: incomes_path,
+  category_label: t('incomes.category_label'),
+  categories: IncomeCategory.all,
+  amount_label: t('incomes.amount_label'),
+  submit_button: t('incomes.submit_button'),
+  previous_income: t('incomes.previous_income'),
+  select_category: t('incomes.select_category'),
+  entries: @incomes

@@ -60,6 +60,8 @@ gem 'dotenv-rails'
 
 gem 'kaminari'
 
+gem 'kaminari-bootstrap'
+
 gem 'sassc-rails'
 
 gem 'bootstrap', '~> 5.3', '>= 5.3.2'

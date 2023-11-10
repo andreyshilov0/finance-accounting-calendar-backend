@@ -30,13 +30,8 @@ html
         .row
           .col-md-14
             ul.nav.nav-tabs#myTab role="tablist"
-              li.nav-item
-                a.nav-link href="#incomes" data-toggle="tab" role="tab" aria-controls="incomes" aria-selected="true"  Incomes
-              li.nav-item
-                a.nav-link href="#payments" data-toggle="tab" role="tab" aria-controls="payments" aria-selected="false"  Payments
-              li.nav-item
-                a.nav-link href="#charts" data-toggle="tab" role="tab" aria-controls="charts" aria-selected="false"  Charts
-              li.nav-item
-                = link_to t('main_page.settings'), settings_path, class: 'nav-link'
+              - [['incomes', t('main_page.incomes')], ['payments', t('main_page.payments')], ['charts', t('main_page.charts')], ['settings', t('main_page.settings')]].each do |path, name|
+                li.nav-item
+                  = link_to name, "#{path}", class: "nav-link #{'active' if controller.controller_name == path}"
 
     = yield
