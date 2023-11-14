@@ -1,6 +1,0 @@
-ul
-  - @income_categories.each do |category|
-    li
-      = category.name
-      = link_to 'Изменить', edit_category_path(category)
-      = link_to 'Удалить', category_path(category), method: :delete

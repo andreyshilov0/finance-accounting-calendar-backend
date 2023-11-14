@@ -14,7 +14,7 @@ class IncomeCategoriesController < ApplicationController
   def create
     @income_category = current_user.income_categories.build(income_category_params)
     if @income_category.save
-      redirect_to settings_path, notice: 'Категория дохода создана.'
+      redirect_to settings_path
     else
       render 'settings/incomes_category/new'
     end
@@ -26,7 +26,7 @@ class IncomeCategoriesController < ApplicationController
 
   def update
     if @income_category.update(income_category_params)
-      redirect_to settings_path, notice: 'Категория дохода обновлена.'
+      redirect_to settings_path
     else
       render 'settings/incomes_category/edit'
     end
@@ -34,7 +34,7 @@ class IncomeCategoriesController < ApplicationController
 
   def destroy
     @income_category.destroy
-    redirect_to settings_path, notice: 'Категория дохода удалена.'
+    redirect_to settings_path
   end
 
   private

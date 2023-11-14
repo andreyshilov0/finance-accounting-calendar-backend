@@ -1,0 +1,31 @@
+.container
+  .row
+    .col-md-12
+      h2 = t('charts.report_month')
+      = form_with url: charts_path, method: :get, local: true do
+        = date_select :search, :month, use_month_numbers: true, class: 'form-control'
+        = submit_tag t('charts.button_show'), class: 'btn btn-primary'
+  .row
+    .col-md-6
+      .chart
+        h3.text-center = t('charts.payments_chart')
+        = image_tag '/charts/payment_chart.jpg', class: 'img-fluid'
+
+    .col-md-6
+      .chart
+        h3.text-center = t('charts.incomes_chart')
+        = image_tag '/charts/income_chart.jpg', class: 'img-fluid'
+    .row
+    .col-md-12
+      h3.text-center = t('charts.monthly_summary')
+      p
+        = t('charts.total_income')
+        span.text-success = number_to_currency(@total_income)
+      p
+        = t('charts.total_payment')
+        span.text-danger = number_to_currency(@total_payment)
+      p
+        = t('charts.result_profit')
+        span class=(@monthly_status == t('charts.result_profit') ? 'text-success' : 'text-danger')
+          = @monthly_status
+          = number_to_currency(@monthly_result)

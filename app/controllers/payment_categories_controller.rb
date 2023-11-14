@@ -14,7 +14,7 @@ class PaymentCategoriesController < ApplicationController
   def create
     @payment_category = current_user.payment_categories.build(payment_category_params)
     if @payment_category.save
-      redirect_to settings_path, notice: 'Категория расхода создана.'
+      redirect_to settings_path
     else
       render 'settings/payments_category/new'
     end
@@ -26,7 +26,7 @@ class PaymentCategoriesController < ApplicationController
 
   def update
     if @payment_category.update(payment_category_params)
-      redirect_to settings_path, notice: 'Категория расхода обновлена.'
+      redirect_to settings_path
     else
       render 'settings/payments_category/edit'
     end
@@ -34,7 +34,7 @@ class PaymentCategoriesController < ApplicationController
 
   def destroy
     @payment_category.destroy
-    redirect_to settings_path, notice: 'Категория расхода удалена.'
+    redirect_to settings_path
   end
 
   private

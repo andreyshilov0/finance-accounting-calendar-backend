@@ -5,22 +5,21 @@
         .card-body
           = form_with url: form_url, method: :post, local: true do |f|
             .form-group.pb-3
-              = f.label :category_id, category_label, class: 'control-label'
-              = f.collection_select :category_id, categories, :id, :name, { include_blank: select_category }, { class: 'form-control', required: true }
-            
+              = f.label  category_label, class: 'control-label'
+              = f.collection_select category_id, categories, :id, :name, { include_blank: select_category }, { class: 'form-control', required: true }
+              
             .form-group.pb-3
               = f.label :amount, amount_label, class: 'control-label'
               = f.number_field :amount, class: 'form-control', required: true
 
             .form-group.pb-3
               = f.submit submit_button, class: 'btn btn-primary btn-block w-100'
-
           h6.pb-2 = previous_income
         - if entries
-          ul.list-group
-            - entries.each do |entry|
-              li.list-group-item.d-flex.justify-content-between.mb-2  
-                span.text-left = entry.name
-                span.text-right = number_to_currency(entry.amount)    
-        .d-flex.justify-content-center.mt-2.p-2
-            = paginate entries
+            ul.list-group
+              - entries.each do |entry|
+                li.list-group-item.d-flex.justify-content-between.mb-2  
+                  span.text-left = entry.name
+                  span.text-right = number_to_currency(entry.amount)
+              .d-flex.justify-content-center.mt-2.p-2
+                = paginate entries

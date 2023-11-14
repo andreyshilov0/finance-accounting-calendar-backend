@@ -11,10 +11,8 @@ module FinanceAccountingCalendarBackend
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.0
 
-    # Доступные локали
     I18n.available_locales = %i[en ru]
 
-    # Локаль по умолчанию
     I18n.default_locale = :ru
 
     config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}')]
