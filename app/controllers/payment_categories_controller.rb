@@ -1,5 +1,6 @@
 class PaymentCategoriesController < ApplicationController
   before_action :authenticate_user!
+  before_action :build_payment_category, only: %i[new create]
   before_action :set_payment_category, only: %i[edit update destroy]
 
   def index
@@ -7,12 +8,11 @@ class PaymentCategoriesController < ApplicationController
   end
 
   def new
-    @payment_category = current_user.payment_categories.build
     render 'settings/payments_category/new'
   end
 
   def create
-    @payment_category = current_user.payment_categories.build(payment_category_params)
+    @payment_category.assign_attributes(payment_category_params)
     if @payment_category.save
       redirect_to settings_path
     else
@@ -38,6 +38,10 @@ class PaymentCategoriesController < ApplicationController
   end
 
   private
+
+  def build_payment_category
+    @payment_category = current_user.payment_categories.build
+  end
 
   def set_payment_category
     @payment_category = current_user.payment_categories.find(params[:id])

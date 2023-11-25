@@ -29,15 +29,11 @@ class ChartsController < ApplicationController
   private
 
   def set_date_range
-    if params[:search] && params[:search]['month(1i)'] && params[:search]['month(2i)']
-      year = params[:search]['month(1i)'].to_i
-      month = params[:search]['month(2i)'].to_i
-      @start_date = Date.new(year, month).beginning_of_month
-      @end_date = @start_date.end_of_month
-    else
-      @start_date = Date.today.beginning_of_month
-      @end_date = Date.today.end_of_month
-    end
+    year = params.dig(:search, 'month(1i)').to_i.positive? ? params[:search]['month(1i)'].to_i : Date.today.year
+    month = params.dig(:search, 'month(2i)').to_i.positive? ? params[:search]['month(2i)'].to_i : Date.today.month
+
+    @start_date = Date.new(year, month).beginning_of_month
+    @end_date = @start_date.end_of_month
   end
 
   def determine_monthly_status(monthly_result)

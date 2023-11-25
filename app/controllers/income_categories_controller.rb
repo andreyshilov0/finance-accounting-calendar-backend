@@ -1,5 +1,6 @@
 class IncomeCategoriesController < ApplicationController
   before_action :authenticate_user!
+  before_action :build_income_category, only: %i[new create]
   before_action :set_income_category, only: %i[edit update destroy]
 
   def index
@@ -7,12 +8,11 @@ class IncomeCategoriesController < ApplicationController
   end
 
   def new
-    @income_category = current_user.income_categories.build
     render 'settings/incomes_category/new'
   end
 
   def create
-    @income_category = current_user.income_categories.build(income_category_params)
+    @income_category.assign_attributes(income_category_params)
     if @income_category.save
       redirect_to settings_path
     else
@@ -38,6 +38,10 @@ class IncomeCategoriesController < ApplicationController
   end
 
   private
+
+  def build_income_category
+    @income_category = current_user.income_categories.build
+  end
 
   def set_income_category
     @income_category = current_user.income_categories.find(params[:id])
