@@ -8,6 +8,7 @@ class IncomesController < ApplicationController
 
   def create
     @income = current_user.incomes.build(income_params)
+    @income.set_category_name
     if @income.save
       redirect_to incomes_path
     else

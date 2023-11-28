@@ -5,9 +5,9 @@ class Payment < ApplicationRecord
   validates :date, presence: true
   validates :amount, presence: true, numericality: { greater_than: 0 }
 
-  before_validation :set_name_from_category
+  delegate :name, to: :payment_category, allow_nil: true
 
-  def set_name_from_category
-    self.name = payment_category.name if payment_category.present?
+  def set_category_name
+    self.name = payment_category&.name
   end
 end

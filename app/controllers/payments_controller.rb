@@ -8,6 +8,7 @@ class PaymentsController < ApplicationController
 
   def create
     @payment = current_user.payments.build(payment_params)
+    @payment.set_category_name
     if @payment.save
       redirect_to payments_path
     else
