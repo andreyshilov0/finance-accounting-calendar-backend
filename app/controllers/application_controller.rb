@@ -1,7 +1,11 @@
-class ApplicationController < ActionController::API
-  before_action :authenticate!
+class ApplicationController < ActionController::Base
+  before_action :set_locale
 
-  def authenticate!
-    @current_user = Authentication.authenticate_request(request.headers['HTTP_AUTHORIZATION'])
+  def set_locale
+    I18n.locale = params[:locale] || I18n.default_locale
+  end
+
+  def default_url_options
+    { locale: I18n.locale }
   end
 end

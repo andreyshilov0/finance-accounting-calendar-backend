@@ -25,7 +25,8 @@
 !/tmp/storage/
 !/tmp/storage/.keep
 
-/public/assets
+/public/charts
+
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key

@@ -1,0 +1,22 @@
+.container.mt-5
+  .row.justify-content-center
+    .col-md-4
+      .card
+        .card-body
+          = form_with model: @income_category, local: true do |f|
+            - if @income_category.errors.any?
+              .alert.alert-danger
+                - @income_category.errors.full_messages.each do |message|
+                  p = message
+            .form-group
+              = f.label :name, t('settings.name_category')
+              - class_names = 'form-control'
+              - class_names += ' is-invalid' if @income_category.errors[:name].any?
+              = f.text_field :name, class: class_names
+              - if @income_category.errors[:name].any?
+                .invalid-feedback
+                  = @income_category.errors[:name].join(', ')
+
+            .form-group
+              = f.submit @income_category.new_record? ? t('settings.button_add_category') : t('settings.button_edit_category'), class: 'btn btn-primary'
+              = link_to t('settings.button_return'), settings_path, class: 'btn btn-secondary'
